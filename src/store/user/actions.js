@@ -4,6 +4,7 @@ export function someAction (context) {
 */
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import CreateUaer from '../../utils/CreateUserInCollection'
 
 export function countActionUP ({commit}) {
   commit('countUP')
@@ -12,7 +13,8 @@ export function countActionUP ({commit}) {
 export function Registration ({commit}, payload) {
   console.log(payload)
   firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password).then(function (resp) {
-    console.log(resp)
+    // console.log(resp.user.uid)
+    CreateUaer(resp.user.uid)
   }).catch(function (error) {
     // Handle Errors here.
     var errorCode = error.code
