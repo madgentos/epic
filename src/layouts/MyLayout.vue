@@ -19,10 +19,11 @@
           Quasar App
           <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
         </q-toolbar-title>
-        <q-btn v-if="!Authorised" flat round dense icon="person_add" aria-label="Регистрация" @click="toRegistration"/>
-        <q-btn v-if="!Authorised" flat round dense icon="exit_to_app" aria-label="Вход" @click="logIn"/>
-        <q-btn v-if="Authorised" flat round dense icon="power_settings_new" aria-label="Выход" @click="logOut"/>
-        <q-btn flat round dense icon="home" aria-label="Выход" @click="toHome"/>
+        <q-btn flat icon="home" label="Главная" @click="toHome"/>
+        <q-btn v-if="!Authorised" flat push  icon="person_add" aria-label="Регистрация" label="Регистрация" @click="toRegistration"/>
+        <q-btn v-if="!Authorised" flat icon="exit_to_app" label="Вход" @click="logIn"/>
+        <q-btn v-if="Authorised" flat icon="account_box" label="Профиль" @click="goToProfile"/>
+        <q-btn v-if="Authorised" flat icon="power_settings_new" label="Выход" @click="logOut"/>
       </q-toolbar>
     </q-layout-header>
 
@@ -88,6 +89,9 @@ export default {
     },
     logIn () {
       this.$router.push('/login')
+    },
+    goToProfile () {
+      this.$router.push('/profile')
     }
   },
   computed: {

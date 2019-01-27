@@ -3,6 +3,7 @@
     <q-btn label="New item" @click="upcount"/>
     <br>
     {{count}}
+    {{Authorised}}
   </q-page>
 </template>
 
@@ -20,6 +21,9 @@ export default {
   computed: {
     count () {
       return this.$store.getters['user/getCount']
+    },
+    Authorised () {
+      return this.$store.getters['user/Authorised']
     }
   }
 }

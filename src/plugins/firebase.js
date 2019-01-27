@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import {config} from '../config/firebase'
 // leave the export, even if you don't use it
 export default ({ app, router, Vue, store }) => {

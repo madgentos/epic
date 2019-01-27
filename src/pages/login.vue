@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <h3>Вход</h3>
-    <form @submit.prevent="login">
+    <form @submit.prevent="login" action="#">
       <q-input v-model="email" type="email" float-label="Email" suffix="@gmail.com"/>
       <q-input v-model="password" float-label="Пароль" type="password"
                :after="[{icon: 'done', condition: password.length >= 6, handler () {}}]"/>
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     login () {
-      this.$store.dispatch('user/SingIn', { email: this.email, password: this.password })
+      this.$store.dispatch('user/SingIn', { email: this.email, password: this.password, redirect: this.$route.query.redirect })
     }
   }
 }
