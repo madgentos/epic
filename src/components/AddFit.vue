@@ -1,7 +1,7 @@
 <template>
   <div class="fit-com">
     <div style="text-align: center">Добавить приступ</div>
-    <q-datetime v-model="date" type="datetime" :max="dateNow" />
+    <q-datetime v-model="date" type="datetime" :max="dateNow" format="D MMM YYYY - H:mm" />
     <q-select
       v-model="fitStrength"
       float-label="Сила приступа"

@@ -2,7 +2,7 @@
   <q-page padding>
     <h4>Приступы</h4>
     {{fits}}
-    <q-modal v-model="modalAddOpened">
+    <q-modal v-model="modalAddOpened" minimized>
       <div style="padding: 1em">
         <add-fit @Close="modalFitAddClose"></add-fit>
       </div>

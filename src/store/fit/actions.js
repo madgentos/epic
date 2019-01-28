@@ -13,6 +13,7 @@ export function GET_FITS ({commit, rootGetters}) {
       var fitsarr = []
       querySnapshot.forEach(function (doc) {
         let pris = {
+          id: doc.id,
           day: doc.data().day,
           date: doc.data().date,
           year: doc.data().year,
