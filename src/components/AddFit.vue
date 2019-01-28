@@ -3,9 +3,9 @@
     <div>Add Fit</div>
     <q-datetime v-model="date" type="datetime" :max="dateNow" />
     <q-select
-      v-model="selectedFitStrength"
+      v-model="fitStrength"
       float-label="Сила приступа"
-      :options="fitStrength"
+      :options="fitStrengthListOptions"
     />
     <q-btn icon="power_settings_new" label="Добавить" @click="AddFit"/>
     <div class="column">
@@ -25,8 +25,8 @@ export default {
     return {
       date: new Date(),
       dateNow: new Date(),
-      selectedFitStrength: 'Weak',
-      fitStrength: [
+      fitStrength: 'Weak',
+      fitStrengthListOptions: [
         {
           label: 'Микро',
           icon: 'mood',
@@ -68,7 +68,7 @@ export default {
           month: this.$moment(this.date).format('M'),
           day: this.$moment(this.date).format('D'),
           hour: this.$moment(this.date).format('H'),
-          fitStrength: this.selectedFitStrength
+          fitStrength: this.fitStrength
         }
       } else return null
     }

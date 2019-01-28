@@ -14,7 +14,7 @@ export function GET_FITS ({commit, rootGetters}) {
       querySnapshot.forEach(function (doc) {
         let pris = {
           day: doc.data().day,
-          name: doc.data().name,
+          date: doc.data().date,
           year: doc.data().year,
           match: doc.data().match,
           hour: doc.data().hour,
