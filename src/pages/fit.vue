@@ -2,7 +2,19 @@
   <q-page padding>
     <h4>Приступы</h4>
     {{fits}}
-    <add-fit></add-fit>
+    <q-modal v-model="modalAddOpened">
+      <div style="padding: 1em">
+        <add-fit @Close="modalFitAddClose"></add-fit>
+      </div>
+    </q-modal>
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+      <q-btn
+        round
+        color="primary"
+        @click="modalAddOpened = true"
+        icon="add"
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 
@@ -13,7 +25,8 @@ export default {
   components: {AddFit},
   data () {
     return {
-      e: ''
+      e: '',
+      modalAddOpened: false
     }
   },
   computed: {
@@ -27,6 +40,9 @@ export default {
     },
     StopFits () {
       this.$store.dispatch('fit/STOP_FITS')
+    },
+    modalFitAddClose () {
+      this.modalAddOpened = false
     }
   },
   created () {
@@ -40,5 +56,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .modal-close {
+  }
 </style>

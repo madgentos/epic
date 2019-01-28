@@ -1,19 +1,15 @@
 <template>
   <div class="fit-com">
-    <div>Add Fit</div>
+    <div style="text-align: center">Добавить приступ</div>
     <q-datetime v-model="date" type="datetime" :max="dateNow" />
     <q-select
       v-model="fitStrength"
       float-label="Сила приступа"
       :options="fitStrengthListOptions"
     />
-    <q-btn icon="power_settings_new" label="Добавить" @click="AddFit"/>
-    <div class="column">
-      <div class="item">date {{date}}</div>
-      <div v-if="date" class="item">parse year {{parseDate.year}}</div>
-      <div v-if="date" class="item">parse month {{parseDate.month}}</div>
-      <div v-if="date" class="item">parse day {{parseDate.day}}</div>
-      <div v-if="date" class="item">parse hour {{parseDate.hour}}</div>
+    <div class="footer">
+      <q-btn icon="power_settings_new" color="positive" label="Добавить" @click="AddFit"/>
+      <q-btn icon="power_settings_new" color="negative" label="Закрыть" @click="Close"/>
     </div>
   </div>
 </template>
@@ -57,6 +53,11 @@ export default {
   methods: {
     AddFit () {
       this.$store.dispatch('fit/ADD_FIT', this.parseDate)
+      this.Close()
+    },
+    Close () {
+      this.$emit('Close')
+      console.log('to emit')
     }
   },
   computed: {
@@ -76,5 +77,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .footer .q-btn {
+    margin: 1em 1em 0em 1em;
+  }
 </style>
