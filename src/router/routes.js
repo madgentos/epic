@@ -30,10 +30,10 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/fit',
+    path: '/fits',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/fit.vue') }
+      { path: '', component: () => import('pages/fits.vue') }
     ],
     meta: { requiresAuth: true }
   }

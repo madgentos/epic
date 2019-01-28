@@ -64,7 +64,7 @@ export default {
     parseDate () {
       if (this.date) {
         return {
-          date: this.date,
+          date: this.date.toISOString(),
           year: this.$moment(this.date).format('YYYY'),
           month: this.$moment(this.date).format('M'),
           day: this.$moment(this.date).format('D'),

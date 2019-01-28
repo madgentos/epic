@@ -5,10 +5,12 @@ export function someAction (context) {
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
-export function GET_FITS ({commit, rootGetters}) {
+export function GET_FITS ({commit, rootGetters}, payload) {
   const db = firebase.firestore()
   const uid = rootGetters['user/Uid']
   this.unsubscribe = db.collection('user').doc(uid).collection('fit')
+    .where('match', '==', payload.Month.toString())
+    .where('year', '==', payload.Year.toString())
     .onSnapshot(function (querySnapshot) {
       var fitsarr = []
       querySnapshot.forEach(function (doc) {

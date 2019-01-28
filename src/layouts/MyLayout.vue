@@ -95,7 +95,7 @@ export default {
       this.$router.push('/profile')
     },
     goToFit () {
-      this.$router.push('/fit')
+      this.$router.push('/fits')
     }
   },
   computed: {

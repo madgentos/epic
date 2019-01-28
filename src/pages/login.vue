@@ -23,6 +23,23 @@ export default {
     login () {
       this.$store.dispatch('user/SingIn', { email: this.email, password: this.password, redirect: this.$route.query.redirect })
     }
+  },
+  computed: {
+    Authorised () {
+      return this.$store.getters['user/Authorised']
+    }
+  },
+  watch: {
+    Authorised: function () {
+      if (this.Authorised) {
+        if (this.$route.query.redirect) {
+          console.log('login ' + this.Authorised + ' ' + this.$route.query.redirect)
+          this.$router.push(this.$route.query.redirect)
+        } else {
+          this.$router.push('/')
+        }
+      }
+    }
   }
 }
 </script>
