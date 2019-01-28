@@ -6,6 +6,7 @@ module.exports = function (ctx) {
     plugins: [
       'firebase',
       'i18n',
+      'vue-moment',
       'axios'
     ],
     css: [
@@ -58,6 +59,8 @@ module.exports = function (ctx) {
         'QItemMain',
         'QField',
         'QInput',
+        'QDatetime',
+        'QSelect',
         'QItemSide'
       ],
       directives: [
@@ -66,12 +69,15 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify'
-      ]
+      ],
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
-      // i18n: 'de' // Quasar language
+      i18n: 'ru' // Quasar language
     },
     // animations: 'all' --- includes all animations
-    animations: [],
+    animations: [
+      'fadeIn',
+      'fadeOut'
+    ],
     ssr: {
       pwa: false
     },

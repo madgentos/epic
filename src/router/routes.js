@@ -28,6 +28,14 @@ const routes = [
       { path: '', component: () => import('pages/profile.vue') }
     ],
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/fit',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/fit.vue') }
+    ],
+    meta: { requiresAuth: true }
   }
 ]
 

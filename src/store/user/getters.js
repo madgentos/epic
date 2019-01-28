@@ -9,3 +9,6 @@ export function getCount (state) {
 export function Authorised (state) {
   return state.Authorised
 }
+export function Uid (state) {
+  return state.uid
+}
