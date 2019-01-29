@@ -1,30 +1,38 @@
 <template>
   <q-page padding>
     <h4>Приступы</h4>
-    Количество {{fits.length}}
-    Yearpool {{Yearpool}}
     <div class="row">
       <q-select
-        v-model="selectedYear"
+        v-model="selectedDate.selectedYear"
         float-label="Год"
         radio
         :options="Yearpool"
         class="col-6"
       />
       <q-select
-        v-model="selectedMonth"
+        v-model="selectedDate.selectedMonth"
         float-label="Месяц"
         radio
         :options="genMonth"
         class="col-6"
       />
     </div>
-    <ol>
-      <li v-for="item in this.fits" :key="item.id">
-        <Fit :fit="item"></Fit>
-      </li>
-    </ol>
-    {{fits}}
+    Количество {{fits.length}}
+    <table>
+      <tr>
+        <th v-for="(item, index) in timeHeader" :key="index">
+          {{item.hour}}
+        </th>
+      </tr>
+      <tr v-for="(item, index) in fitsInTable" :key="index">
+        <th>{{item.date}}</th>
+        <td class="td" v-for="(times, index) in item.hours" :key="index">
+          <div v-if="times.fits" v-for="(f, index) in times.fits" class="td-fit" :key="index">
+             <Fit :fit="f"></Fit>
+          </div>
+        </td>
+      </tr>
+    </table>
     <q-modal v-model="modalAddOpened" minimized>
       <div style="padding: 1em">
         <add-fit @Close="modalFitAddClose"></add-fit>
@@ -42,7 +50,7 @@
 </template>
 
 <script>
-import {DefMonth, DefYear, GenPoolYear} from '../utils/GenDefVal'
+import {DefMonth, DefYear, GenPoolYear, tablefits} from '../utils/GenDefVal'
 import AddFit from '../components/AddFit'
 import Fit from '../components/Fit'
 export default {
@@ -52,13 +60,19 @@ export default {
     return {
       e: '',
       modalAddOpened: false,
-      selectedMonth: Number(DefMonth()),
-      selectedYear: Number(DefYear())
+      selectedDate: {
+        selectedMonth: Number(DefMonth()),
+        selectedYear: Number(DefYear())
+      },
+      table: []
     }
   },
   computed: {
     fits () {
       return this.$store.getters['fit/FITS']
+    },
+    fitsInTable () {
+      return tablefits(this.$store.getters['fit/FITS'], this.dayInMouth)
     },
     genMonth () {
       let arr = []
@@ -76,12 +90,20 @@ export default {
       return GenPoolYear()
     },
     dayInMouth () {
-      return this.$moment(`${this.selectedYear}-${this.selectedMonth}`, 'YYYY-MM').daysInMonth()
+      return this.$moment(`${this.selectedDate.selectedYear}-${this.selectedDate.selectedMonth}`, 'YYYY-MM').daysInMonth()
+    },
+    timeHeader () {
+      let ob = []
+      let ob01 = ob.concat(this.fitsInTable[0].hours)
+      let ob2 = {}
+      ob2.time = ''
+      ob01.unshift(ob2)
+      return ob01
     }
   },
   methods: {
-    GetFit () {
-      this.$store.dispatch('fit/GET_FITS', {Month: this.selectedMonth, Year: this.selectedYear})
+    GetFits () {
+      this.$store.dispatch('fit/GET_FITS', {Month: this.selectedDate.selectedMonth, Year: this.selectedDate.selectedYear})
     },
     StopFits () {
       this.$store.dispatch('fit/STOP_FITS')
@@ -93,23 +115,27 @@ export default {
   created () {
   },
   mounted () {
-    this.GetFit()
+    this.GetFits()
   },
   beforeDestroy () {
     this.StopFits()
   },
   watch: {
-    selectedMonth: function () {
-      this.StopFits()
-      this.$store.dispatch('fit/GET_FITS', {Month: this.selectedMonth, Year: this.selectedYear})
-    },
-    selectedYear: function () {
-      this.StopFits()
-      this.$store.dispatch('fit/GET_FITS', {Month: this.selectedMonth, Year: this.selectedYear})
+    selectedDate: {
+      handler: function () {
+        this.StopFits()
+        this.GetFits()
+      },
+      deep: true
     }
   }
 }
 </script>
 
 <style scoped>
+  .td{
+    border: solid 1px #000;
+    width: 20px;
+    height: 20px;
+  }
 </style>

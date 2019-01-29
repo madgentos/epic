@@ -25,7 +25,6 @@ export function GET_FITS ({commit, rootGetters}, payload) {
         }
         fitsarr.push(pris)
       })
-      console.log(fitsarr)
       commit('SET_FITS', fitsarr)
     })
 }
@@ -47,6 +46,5 @@ export function ADD_FIT ({commit, rootGetters}, payload) {
 }
 
 export function STOP_FITS ({commit, rootGetters}) {
-  console.log('soped fit fetch')
   this.unsubscribe()
 }

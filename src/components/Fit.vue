@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>My Fit</div>
-    {{date}}
-    {{Strength[fit.fitStrength]}}
-
+    <q-icon name="album"></q-icon>
   </div>
 </template>
 
