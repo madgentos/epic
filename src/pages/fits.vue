@@ -26,7 +26,7 @@
       </tr>
       <tr v-for="(item, index) in fitsInTable" :key="index">
         <th>{{item.date}}</th>
-        <td class="td" v-for="(times, index) in item.hours" :key="index">
+        <td align="center" class="td" v-for="(times, index) in item.hours" :key="index">
           <div v-if="times.fits" v-for="(f, index) in times.fits" class="td-fit" :key="index">
              <Fit :fit="f"></Fit>
           </div>
@@ -134,8 +134,11 @@ export default {
 
 <style scoped>
   .td{
-    border: solid 1px #000;
+    border: solid 1px;
     width: 20px;
     height: 20px;
+  }
+  table {
+    /*border-collapse: collapse;*/
   }
 </style>

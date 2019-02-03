@@ -24,28 +24,40 @@ export default {
       fitStrength: 'Weak',
       fitStrengthListOptions: [
         {
-          label: 'Микро',
-          icon: 'mood',
-          leftColor: 'positive',
-          value: 'Micro'
+          label: 'В сознании',
+          icon: 'fas in-cons',
+          // leftColor: 'positive',
+          value: 'in-cons'
         },
         {
-          label: 'Слабый',
-          icon: 'sentiment_dissatisfied',
-          leftColor: 'info',
-          value: 'Weak'
-        },
-        {
-          label: 'Средний',
-          icon: 'sentiment_very_dissatisfied',
-          leftColor: 'warning',
-          value: 'Average'
-        },
-        {
-          label: 'Сильный',
-          icon: 'mood_bad',
+          label: 'Без сознания, без судорог',
+          icon: 'fas cons-no-spasm',
           leftColor: 'negative',
-          value: 'Strong'
+          value: 'cons-no-spasm'
+        },
+        {
+          label: 'Без сознания, без судорог (во сне)',
+          icon: 'fas cons-no-spasm-dream',
+          leftColor: 'negative',
+          value: 'cons-no-spasm-dream'
+        },
+        {
+          label: 'Без сознания, c судорогами',
+          icon: 'fas uncon-with-spasm',
+          leftColor: 'info',
+          value: 'uncon-with-spasm'
+        },
+        {
+          label: 'Без сознания, c судорогами (во сне)',
+          icon: 'fas uncon-with-spasm-draem',
+          leftColor: 'warning',
+          value: 'uncon-with-spasm-draem'
+        },
+        {
+          label: 'Другое',
+          icon: 'fas fit-x',
+          leftColor: 'negative',
+          value: 'fit-x'
         }
       ]
     }
